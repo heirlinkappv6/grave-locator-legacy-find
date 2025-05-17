@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
+import PaywallOverlay from './PaywallOverlay';
 
 // Mock data for search results
 const mockResults = [
@@ -56,9 +57,18 @@ type SearchResultsProps = {
 
 const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city, state }) => {
   const navigate = useNavigate();
+  const [showFull, setShowFull] = useState(false);
   
   const viewDetails = (id: number) => {
-    navigate(`/record/${id}`);
+    if (showFull) {
+      navigate(`/record/${id}`);
+    } else {
+      // If not subscribed, scroll to paywall
+      const paywallElement = document.getElementById('paywall');
+      if (paywallElement) {
+        paywallElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
   
   return (
@@ -70,7 +80,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
       </p>
       
       <div className="mb-8">
-        {mockResults.map(result => (
+        {mockResults.map((result, index) => (
           <div key={result.id} className="result-card">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
@@ -79,20 +89,40 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                   <div>
                     <span className="text-gray-600">Age:</span> {result.age}
                   </div>
-                  <div>
-                    <span className="text-gray-600">Born:</span> {result.dob}
-                  </div>
-                  <div>
-                    <span className="text-gray-600">Died:</span> {result.dod}
-                  </div>
-                  <div>
-                    <span className="text-gray-600">Last Residence:</span> {result.lastResidence}
-                  </div>
+                  {showFull || index === 0 ? (
+                    <>
+                      <div>
+                        <span className="text-gray-600">Born:</span> {result.dob}
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Died:</span> {result.dod}
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Last Residence:</span> {result.lastResidence}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-gray-400">
+                        <span className="text-gray-600">Born:</span> ••••••••••••••
+                      </div>
+                      <div className="text-gray-400">
+                        <span className="text-gray-600">Died:</span> ••••••••••••••
+                      </div>
+                      <div className="text-gray-400">
+                        <span className="text-gray-600">Last Residence:</span> ••••••••••••••
+                      </div>
+                    </>
+                  )}
                 </div>
                 
                 <div className="mb-4">
                   <span className="text-gray-600">Possible Relatives:</span>{" "}
-                  {result.relatives.join(", ")}
+                  {showFull || index === 0 ? (
+                    result.relatives.join(", ")
+                  ) : (
+                    <span className="text-gray-400">•••••••••••••••••••••••</span>
+                  )}
                 </div>
               </div>
               
@@ -109,9 +139,20 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                 </Button>
               </div>
             </div>
+            {!showFull && index === 0 && (
+              <div className="mt-4 pt-4 border-t border-dashed border-gray-300 text-center text-sm text-gray-500">
+                This is a preview. Subscribe to see all details for this record and unlock all other records.
+              </div>
+            )}
           </div>
         ))}
       </div>
+      
+      {!showFull && (
+        <div id="paywall">
+          <PaywallOverlay />
+        </div>
+      )}
       
       <div className="bg-gray-50 border rounded-lg p-6 mb-8">
         <h3 className="text-lg font-semibold mb-3">Not finding who you're looking for?</h3>
