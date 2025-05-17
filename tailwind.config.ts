@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				brand: {
+					50: '#f0f5ff',
+					100: '#e0ebfe',
+					200: '#c1d7fd',
+					300: '#92b9fb',
+					400: '#5d94f7',
+					500: '#3470f1',
+					600: '#2150e5',
+					700: '#1c3ed1',
+					800: '#1c34aa',
+					900: '#1d2e85',
+					950: '#161d4d',
 				}
 			},
 			borderRadius: {
@@ -84,12 +98,20 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			},
+			boxShadow: {
+				'search': '0 4px 14px 0 rgba(0,0,0,0.1)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
