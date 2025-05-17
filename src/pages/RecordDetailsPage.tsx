@@ -4,10 +4,12 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import RecordDetail from '@/components/RecordDetail';
 import PaywallOverlay from '@/components/PaywallOverlay';
+import { useParams } from 'react-router-dom';
 
 const RecordDetailsPage = () => {
   // In a real app, this would come from auth state or subscription check
   const [hasAccess] = useState(false);
+  const { id } = useParams();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -37,8 +39,8 @@ const RecordDetailsPage = () => {
                       />
                     </svg>
                     <h2 className="text-xl font-semibold mb-2">This Record is Locked</h2>
-                    <p className="text-gray-600">
-                      Subscribe to unlock complete record details including full obituary, family connections, and more.
+                    <p className="text-gray-600 mb-4">
+                      Unlock this record for $7.00 or subscribe for unlimited access to all records.
                     </p>
                   </div>
                 </div>

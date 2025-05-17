@@ -63,11 +63,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
     if (showFull) {
       navigate(`/record/${id}`);
     } else {
-      // If not subscribed, scroll to paywall
-      const paywallElement = document.getElementById('paywall');
-      if (paywallElement) {
-        paywallElement.scrollIntoView({ behavior: 'smooth' });
-      }
+      navigate(`/record/${id}`);
     }
   };
   
@@ -131,17 +127,24 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                   {result.matchScore}% Match
                 </div>
                 
-                <Button 
-                  onClick={() => viewDetails(result.id)}
-                  className="bg-brand-600 hover:bg-brand-700"
-                >
-                  View Details
-                </Button>
+                <div className="flex flex-col space-y-2">
+                  <Button 
+                    onClick={() => viewDetails(result.id)}
+                    className="bg-brand-600 hover:bg-brand-700"
+                  >
+                    View Full Record
+                  </Button>
+                  {!showFull && index !== 0 && (
+                    <p className="text-xs text-gray-500 text-center">
+                      Pay $7.00 for this record only
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
             {!showFull && index === 0 && (
               <div className="mt-4 pt-4 border-t border-dashed border-gray-300 text-center text-sm text-gray-500">
-                This is a preview. Subscribe to see all details for this record and unlock all other records.
+                This is a preview. Access this record for $7.00 or subscribe to see all details for all records.
               </div>
             )}
           </div>

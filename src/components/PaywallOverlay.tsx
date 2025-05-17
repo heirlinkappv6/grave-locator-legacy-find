@@ -44,6 +44,16 @@ const PaywallOverlay = () => {
           </ul>
         </div>
         
+        {/* Single Record Option */}
+        <div className="border rounded-lg p-4 hover:shadow-md transition mb-6">
+          <h3 className="text-xl font-semibold text-brand-600">Single Record Access</h3>
+          <p className="text-3xl font-bold my-3">$7.00</p>
+          <p className="text-gray-500 text-sm mb-4">Access just this one record</p>
+          <Button className="w-full bg-brand-600 hover:bg-brand-700">
+            Pay Per Record
+          </Button>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div className="border rounded-lg p-4 hover:shadow-md transition">
             <h3 className="text-xl font-semibold text-brand-600">1 Month Access</h3>
