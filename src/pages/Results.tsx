@@ -24,7 +24,7 @@ const Results = () => {
     <div className="min-h-screen flex flex-col">
       <Navigation />
       
-      <main className="flex-grow bg-gray-50 py-8">
+      <main className="flex-grow bg-gray-900 py-8">
         {isSearching ? (
           <div className="container mx-auto px-4 py-12">
             <SearchingAnimation 
