@@ -89,9 +89,9 @@ const SearchingAnimation: React.FC<SearchingAnimationProps> = ({ firstName, last
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto bg-gray-900 rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.2)] p-8 transition-all duration-300 animate-fade-in border border-gray-800">
+    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.1)] p-8 transition-all duration-300 animate-fade-in border border-gray-100">
       <div className="flex items-center justify-between mb-10">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+        <h2 className="text-2xl font-bold text-gray-800">
           Searching for {firstName || ''} {lastName || ''}
         </h2>
         <div className="relative h-12 w-12 flex items-center justify-center">
@@ -111,7 +111,7 @@ const SearchingAnimation: React.FC<SearchingAnimationProps> = ({ firstName, last
               <div className={`
                 relative flex h-14 w-14 items-center justify-center rounded-full mb-3
                 transition-all duration-500
-                ${isCompleted ? 'bg-opacity-20 bg-gray-800' : isActive ? 'bg-opacity-10 bg-gray-800' : 'bg-gray-800/5'}
+                ${isCompleted ? 'bg-opacity-20 bg-gray-100' : isActive ? 'bg-opacity-10 bg-gray-100' : 'bg-gray-100/5'}
                 ${isCompleted || isActive ? 'shadow-lg ' + step.glowColor : ''}
               `}>
                 {isCompleted ? (
@@ -122,12 +122,12 @@ const SearchingAnimation: React.FC<SearchingAnimationProps> = ({ firstName, last
                       absolute inset-0 rounded-full 
                       ${isActive ? 'animate-ping opacity-30 ' + step.color : 'opacity-0'}
                     `}></div>
-                    <StepIcon className={`h-7 w-7 ${isActive ? step.textColor + ' animate-pulse' : 'text-gray-500'}`} />
+                    <StepIcon className={`h-7 w-7 ${isActive ? step.textColor + ' animate-pulse' : 'text-gray-400'}`} />
                   </>
                 )}
               </div>
               
-              <div className={`h-1.5 w-full relative ${isActive || isCompleted ? step.color : 'bg-gray-800'} rounded-full overflow-hidden`}>
+              <div className={`h-1.5 w-full relative ${isActive || isCompleted ? step.color : 'bg-gray-200'} rounded-full overflow-hidden`}>
                 {isActive && (
                   <span className={`
                     absolute inset-0 ${step.color}
@@ -138,7 +138,7 @@ const SearchingAnimation: React.FC<SearchingAnimationProps> = ({ firstName, last
               
               <span className={`
                 text-xs font-medium mt-2 text-center
-                ${isCompleted ? 'text-white' : isActive ? step.textColor : 'text-gray-500'}
+                ${isCompleted ? 'text-gray-800' : isActive ? step.textColor : 'text-gray-500'}
               `}>
                 {step.text}
               </span>
@@ -147,13 +147,13 @@ const SearchingAnimation: React.FC<SearchingAnimationProps> = ({ firstName, last
         })}
       </div>
       
-      <div className="mt-10 pt-6 border-t border-gray-800">
+      <div className="mt-10 pt-6 border-t border-gray-200">
         <div className="flex items-center justify-between">
-          <p className="text-sm text-gray-400">
-            <span className="text-brand-400">AI-powered</span> search across 100+ million records
+          <p className="text-sm text-gray-600">
+            <span className="text-brand-600">AI-powered</span> search across 100+ million records
           </p>
-          <div className="bg-gray-800 text-brand-300 text-sm font-medium rounded-full px-4 py-1.5 flex items-center">
-            <div className="mr-2 h-2 w-2 rounded-full bg-brand-400 animate-pulse"></div>
+          <div className="bg-gray-100 text-brand-600 text-sm font-medium rounded-full px-4 py-1.5 flex items-center">
+            <div className="mr-2 h-2 w-2 rounded-full bg-brand-500 animate-pulse"></div>
             {Math.min(completedSteps.length, searchSteps.length)} of {searchSteps.length} searches complete
           </div>
         </div>
