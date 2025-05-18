@@ -12,10 +12,10 @@ const Results = () => {
   const [isSearching, setIsSearching] = useState(true);
 
   useEffect(() => {
-    // Simulate search delay
+    // Simulate search delay - give enough time for the animation to complete
     const timer = setTimeout(() => {
       setIsSearching(false);
-    }, 3000);
+    }, 8000);
     
     return () => clearTimeout(timer);
   }, []);
