@@ -26,7 +26,7 @@ const Results = () => {
       
       <main className="flex-grow bg-gray-50 py-8">
         {isSearching ? (
-          <div className="container mx-auto px-4 py-6">
+          <div className="container mx-auto px-4 py-12">
             <SearchingAnimation 
               firstName={searchParams.firstName} 
               lastName={searchParams.lastName} 
