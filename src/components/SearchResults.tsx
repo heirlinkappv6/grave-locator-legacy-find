@@ -77,46 +77,50 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
   
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-2">Search Results</h1>
+      <h1 className="text-2xl font-bold mb-2 text-brand-700">Search Results</h1>
       <p className="mb-6 text-gray-600">
         Showing results for {firstName || ''} {lastName || ''} 
         {city && ` in ${city}`}{state && `, ${state}`}
       </p>
       
       {/* Deceased Person Information Card */}
-      <Card className="mb-6">
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
+      <Card className="mb-6 overflow-hidden border-none shadow-lg bg-gradient-to-r from-white to-gray-50">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 border-b bg-white">
           <div className="flex items-center">
             <FileText className="h-5 w-5 text-brand-600 mr-2" />
             <CardTitle className="text-xl">Primary Match</CardTitle>
           </div>
-          <div className="bg-green-50 text-green-800 font-medium px-3 py-1 rounded-full text-sm">
+          <div className="bg-green-100 text-green-800 font-medium px-3 py-1 rounded-full text-sm shadow-sm">
             {selectedResult.matchScore}% Match
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2">
-              <h3 className="text-xl font-semibold mb-2">{selectedResult.name}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-brand-700">{selectedResult.name}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 mb-4">
-                <div>
-                  <span className="text-gray-600">Age:</span> {selectedResult.age}
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-600 font-medium">Age:</span> 
+                  <span className="bg-gray-50 px-2 py-1 rounded">{selectedResult.age}</span>
                 </div>
-                <div>
-                  <span className="text-gray-600">Born:</span> {selectedResult.dob}
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-600 font-medium">Born:</span> 
+                  <span className="bg-gray-50 px-2 py-1 rounded">{selectedResult.dob}</span>
                 </div>
-                <div>
-                  <span className="text-gray-600">Died:</span> {selectedResult.dod}
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-600 font-medium">Died:</span> 
+                  <span className="bg-gray-50 px-2 py-1 rounded">{selectedResult.dod}</span>
                 </div>
-                <div>
-                  <span className="text-gray-600">Last Residence:</span> {selectedResult.lastResidence}
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-600 font-medium">Last Residence:</span> 
+                  <span className="bg-gray-50 px-2 py-1 rounded">{selectedResult.lastResidence}</span>
                 </div>
               </div>
             </div>
             <div className="flex flex-col justify-center items-center lg:items-end">
               <Button 
                 onClick={() => viewDetails(selectedResult.id)}
-                className="bg-brand-600 hover:bg-brand-700 w-full lg:w-auto mb-2"
+                className="bg-brand-600 hover:bg-brand-700 w-full lg:w-auto mb-2 shadow-md shadow-brand-100 transition-all hover:translate-y-[-1px]"
               >
                 View Full Record
               </Button>
@@ -132,13 +136,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
       <div className="mb-8">
         <div className="flex items-center mb-4">
           <Users className="h-5 w-5 text-brand-600 mr-2" />
-          <h2 className="text-xl font-bold">Potential Heirs</h2>
+          <h2 className="text-xl font-bold text-brand-700">Potential Heirs</h2>
         </div>
         
-        <Card>
-          <CardContent className="p-0 overflow-hidden">
+        <Card className="overflow-hidden border-none shadow-lg">
+          <CardContent className="p-0">
             <Table>
-              <TableHeader>
+              <TableHeader className="bg-gray-50">
                 <TableRow>
                   <TableHead>Name</TableHead>
                   <TableHead>Relationship</TableHead>
@@ -155,16 +159,28 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                     <TableCell>{heir.age}</TableCell>
                     <TableCell>{heir.location}</TableCell>
                     <TableCell>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${heir.status === 'Living' ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${heir.status === 'Living' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
                         {heir.status}
                       </span>
                     </TableCell>
                   </TableRow>
                 ))}
                 {!showFull && mockHeirs.slice(1).map((heir, index) => (
-                  <TableRow key={heir.id} className="bg-gray-50/50">
-                    <TableCell colSpan={5} className="text-center py-2">
-                      <span className="text-gray-400">••••••••••••••••••••••••••••••••••</span>
+                  <TableRow key={heir.id} className="bg-gray-50/30">
+                    <TableCell className="text-center py-2">
+                      <span className="text-gray-400">••••••••••••</span>
+                    </TableCell>
+                    <TableCell className="text-center py-2">
+                      <span className="text-gray-400">••••••••••••</span>
+                    </TableCell>
+                    <TableCell className="text-center py-2">
+                      <span className="text-gray-400">••</span>
+                    </TableCell>
+                    <TableCell className="text-center py-2">
+                      <span className="text-gray-400">••••••••••••</span>
+                    </TableCell>
+                    <TableCell className="text-center py-2">
+                      <span className="text-gray-400">••••••</span>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -186,14 +202,14 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
       )}
       
       {/* Other Results */}
-      <h2 className="text-xl font-bold mt-10 mb-4">Other Possible Matches</h2>
-      <div className="space-y-6">
+      <h2 className="text-xl font-bold mt-10 mb-4 text-brand-700">Other Possible Matches</h2>
+      <div className="space-y-4">
         {mockResults.slice(1).map((result) => (
-          <Card key={result.id} className="result-card">
+          <Card key={result.id} className="border-none shadow-md hover:shadow-lg transition-all duration-200">
             <CardContent className="p-4">
               <div className="flex flex-col md:flex-row justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">{result.name}</h3>
+                  <h3 className="text-lg font-semibold mb-2 text-brand-700">{result.name}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 mb-3">
                     <div>
                       <span className="text-gray-600">Age:</span> {result.age}
@@ -205,13 +221,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                 </div>
                 
                 <div className="mt-4 md:mt-0 md:ml-6 flex items-center">
-                  <div className="bg-green-50 text-green-800 font-medium px-3 py-1 rounded-full text-sm mr-4">
+                  <div className="bg-green-100 text-green-800 font-medium px-3 py-1 rounded-full text-sm mr-4 shadow-sm">
                     {result.matchScore}% Match
                   </div>
                   <Button 
                     onClick={() => viewDetails(result.id)}
                     variant="outline"
-                    className="border-brand-600 text-brand-600 hover:bg-brand-50"
+                    className="border-brand-600 text-brand-600 hover:bg-brand-50 shadow-sm transition-all hover:shadow"
                   >
                     View Record
                   </Button>
@@ -222,13 +238,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
         ))}
       </div>
       
-      <div className="bg-gray-50 border rounded-lg p-6 my-8">
-        <h3 className="text-lg font-semibold mb-3">Not finding who you're looking for?</h3>
+      <div className="bg-gray-50 border rounded-lg p-6 my-8 shadow-md">
+        <h3 className="text-lg font-semibold mb-3 text-brand-700">Not finding who you're looking for?</h3>
         <p className="mb-4">Try refining your search with more specific information or alternative spellings.</p>
         <Button 
           variant="outline" 
           onClick={() => navigate('/')}
-          className="border-brand-600 text-brand-600 hover:bg-brand-50"
+          className="border-brand-600 text-brand-600 hover:bg-brand-50 shadow-sm"
         >
           Start New Search
         </Button>
