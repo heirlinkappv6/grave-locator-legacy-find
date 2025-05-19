@@ -152,11 +152,16 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                 </TableRow>
               </TableHeader>
               <TableBody>
+                {/* First heir with partial paywall - name and relationship hidden, other fields visible */}
                 {mockHeirs.slice(0, 1).map((heir) => (
                   <TableRow key={heir.id}>
-                    <TableCell className="font-medium">{heir.name}</TableCell>
-                    <TableCell>{heir.relationship}</TableCell>
-                    <TableCell>{heir.age}</TableCell>
+                    <TableCell className="text-center py-2">
+                      <span className="text-gray-400">••••••••••</span>
+                    </TableCell>
+                    <TableCell className="text-center py-2">
+                      <span className="text-gray-400">••••••</span>
+                    </TableCell>
+                    <TableCell className="font-medium">{heir.age}</TableCell>
                     <TableCell>{heir.location}</TableCell>
                     <TableCell>
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${heir.status === 'Living' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
@@ -165,6 +170,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                     </TableCell>
                   </TableRow>
                 ))}
+                {/* Rest of the list with full paywall as before */}
                 {!showFull && mockHeirs.slice(1).map((heir, index) => (
                   <TableRow key={heir.id} className="bg-gray-50/30">
                     <TableCell className="text-center py-2">
