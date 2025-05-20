@@ -179,14 +179,12 @@ const SearchResults: React.FC<SearchResultsProps> = ({ firstName, lastName, city
                     <TableCell className="text-center py-2">
                       <span className="text-gray-400">••••••••••••</span>
                     </TableCell>
-                    <TableCell className="text-center py-2">
-                      <span className="text-gray-400">••</span>
-                    </TableCell>
-                    <TableCell className="text-center py-2">
-                      <span className="text-gray-400">••••••••••••</span>
-                    </TableCell>
-                    <TableCell className="text-center py-2">
-                      <span className="text-gray-400">••••••</span>
+                    <TableCell className="font-medium">{heir.age}</TableCell>
+                    <TableCell>{heir.location}</TableCell>
+                    <TableCell>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${heir.status === 'Living' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
+                        {heir.status}
+                      </span>
                     </TableCell>
                   </TableRow>
                 ))}
